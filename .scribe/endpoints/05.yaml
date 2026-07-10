@@ -1,0 +1,583 @@
+name: 'Loan Management'
+description: |-
+
+  APIs for managing loans
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/loans
+    metadata:
+      custom: []
+      groupName: 'Loan Management'
+      groupDescription: |-
+
+        APIs for managing loans
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/loans
+    metadata:
+      custom: []
+      groupName: 'Loan Management'
+      groupDescription: |-
+
+        APIs for managing loans
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      borrower_id:
+        custom: []
+        name: borrower_id
+        description: 'Must match an existing stored value.'
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      loan_type:
+        custom: []
+        name: loan_type
+        description: 'Must not be greater than 50 characters.'
+        required: false
+        example: 'n'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      loan_amount:
+        custom: []
+        name: loan_amount
+        description: 'Must be at least 0.'
+        required: true
+        example: 84
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      interest_rate:
+        custom: []
+        name: interest_rate
+        description: 'Must be at least 0. Must not be greater than 100.'
+        required: true
+        example: 16
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      loan_tenure_months:
+        custom: []
+        name: loan_tenure_months
+        description: 'Must be at least 1. Must not be greater than 120.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      emi_start_date:
+        custom: []
+        name: emi_start_date
+        description: 'Must be a valid date. Must be a date after or equal to <code>today</code>.'
+        required: true
+        example: '2052-08-01'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      processing_fee:
+        custom: []
+        name: processing_fee
+        description: 'Must be at least 0.'
+        required: false
+        example: 39
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      currency:
+        custom: []
+        name: currency
+        description: ''
+        required: false
+        example: USD
+        type: string
+        enumValues:
+          - INR
+          - USD
+          - EUR
+          - AED
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      interest_type:
+        custom: []
+        name: interest_type
+        description: ''
+        required: false
+        example: reducing
+        type: string
+        enumValues:
+          - flat
+          - reducing
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      notes:
+        custom: []
+        name: notes
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      borrower_id: architecto
+      loan_type: 'n'
+      loan_amount: 84
+      interest_rate: 16
+      loan_tenure_months: 17
+      emi_start_date: '2052-08-01'
+      processing_fee: 39
+      currency: USD
+      interest_type: reducing
+      notes: architecto
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/loans/{id}'
+    metadata:
+      custom: []
+      groupName: 'Loan Management'
+      groupDescription: |-
+
+        APIs for managing loans
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the loan.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/loans/{id}'
+    metadata:
+      custom: []
+      groupName: 'Loan Management'
+      groupDescription: |-
+
+        APIs for managing loans
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the loan.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      loan_type:
+        custom: []
+        name: loan_type
+        description: 'Must not be greater than 50 characters.'
+        required: false
+        example: b
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      loan_amount:
+        custom: []
+        name: loan_amount
+        description: 'Must be at least 0.'
+        required: false
+        example: 39
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      interest_rate:
+        custom: []
+        name: interest_rate
+        description: 'Must be at least 0. Must not be greater than 100.'
+        required: false
+        example: 7
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      loan_tenure_months:
+        custom: []
+        name: loan_tenure_months
+        description: 'Must be at least 1. Must not be greater than 120.'
+        required: false
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      emi_start_date:
+        custom: []
+        name: emi_start_date
+        description: 'Must be a valid date. Must be a date after or equal to <code>today</code>.'
+        required: false
+        example: '2052-08-01'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      processing_fee:
+        custom: []
+        name: processing_fee
+        description: 'Must be at least 0.'
+        required: false
+        example: 39
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      currency:
+        custom: []
+        name: currency
+        description: ''
+        required: false
+        example: AED
+        type: string
+        enumValues:
+          - INR
+          - USD
+          - EUR
+          - AED
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      interest_type:
+        custom: []
+        name: interest_type
+        description: ''
+        required: false
+        example: flat
+        type: string
+        enumValues:
+          - flat
+          - reducing
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      notes:
+        custom: []
+        name: notes
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      loan_type: b
+      loan_amount: 39
+      interest_rate: 7
+      loan_tenure_months: 16
+      emi_start_date: '2052-08-01'
+      processing_fee: 39
+      currency: AED
+      interest_type: flat
+      notes: architecto
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/loans/{id}'
+    metadata:
+      custom: []
+      groupName: 'Loan Management'
+      groupDescription: |-
+
+        APIs for managing loans
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the loan.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/loans/{loan_id}/approve'
+    metadata:
+      custom: []
+      groupName: 'Loan Management'
+      groupDescription: |-
+
+        APIs for managing loans
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      loan_id:
+        custom: []
+        name: loan_id
+        description: 'The ID of the loan.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      loan_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/loans/{loan_id}/foreclose'
+    metadata:
+      custom: []
+      groupName: 'Loan Management'
+      groupDescription: |-
+
+        APIs for managing loans
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      loan_id:
+        custom: []
+        name: loan_id
+        description: 'The ID of the loan.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      loan_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null

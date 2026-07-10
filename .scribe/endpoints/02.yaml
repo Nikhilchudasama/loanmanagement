@@ -1,0 +1,441 @@
+name: 'Tenant Management'
+description: |-
+
+  APIs for managing tenants
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/tenants
+    metadata:
+      custom: []
+      groupName: 'Tenant Management'
+      groupDescription: |-
+
+        APIs for managing tenants
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/tenants
+    metadata:
+      custom: []
+      groupName: 'Tenant Management'
+      groupDescription: |-
+
+        APIs for managing tenants
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      company_name:
+        custom: []
+        name: company_name
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: b
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      logo:
+        custom: []
+        name: logo
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: 'n'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      timezone:
+        custom: []
+        name: timezone
+        description: 'Must not be greater than 50 characters.'
+        required: false
+        example: Antarctica/Rothera
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      default_currency:
+        custom: []
+        name: default_currency
+        description: 'Must be 3 characters.'
+        required: false
+        example: zmi
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      payment_gateway_config:
+        custom: []
+        name: payment_gateway_config
+        description: 'Must be a valid JSON string.'
+        required: false
+        example: '["architecto","architecto"]'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      email_config:
+        custom: []
+        name: email_config
+        description: 'Must be a valid JSON string.'
+        required: false
+        example: '["architecto","architecto"]'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      notification_settings:
+        custom: []
+        name: notification_settings
+        description: 'Must be a valid JSON string.'
+        required: false
+        example: '["architecto","architecto"]'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      status:
+        custom: []
+        name: status
+        description: ''
+        required: false
+        example: active
+        type: string
+        enumValues:
+          - active
+          - inactive
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      company_name: b
+      logo: 'n'
+      timezone: Antarctica/Rothera
+      default_currency: zmi
+      payment_gateway_config: '["architecto","architecto"]'
+      email_config: '["architecto","architecto"]'
+      notification_settings: '["architecto","architecto"]'
+      status: active
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/tenants/{id}'
+    metadata:
+      custom: []
+      groupName: 'Tenant Management'
+      groupDescription: |-
+
+        APIs for managing tenants
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the tenant.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/tenants/{id}'
+    metadata:
+      custom: []
+      groupName: 'Tenant Management'
+      groupDescription: |-
+
+        APIs for managing tenants
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the tenant.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      company_name:
+        custom: []
+        name: company_name
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: b
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      logo:
+        custom: []
+        name: logo
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: 'n'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      timezone:
+        custom: []
+        name: timezone
+        description: 'Must not be greater than 50 characters.'
+        required: false
+        example: Antarctica/Rothera
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      default_currency:
+        custom: []
+        name: default_currency
+        description: 'Must be 3 characters.'
+        required: false
+        example: zmi
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      payment_gateway_config:
+        custom: []
+        name: payment_gateway_config
+        description: 'Must be a valid JSON string.'
+        required: false
+        example: '["architecto","architecto"]'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      email_config:
+        custom: []
+        name: email_config
+        description: 'Must be a valid JSON string.'
+        required: false
+        example: '["architecto","architecto"]'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      notification_settings:
+        custom: []
+        name: notification_settings
+        description: 'Must be a valid JSON string.'
+        required: false
+        example: '["architecto","architecto"]'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      status:
+        custom: []
+        name: status
+        description: ''
+        required: false
+        example: inactive
+        type: string
+        enumValues:
+          - active
+          - inactive
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      company_name: b
+      logo: 'n'
+      timezone: Antarctica/Rothera
+      default_currency: zmi
+      payment_gateway_config: '["architecto","architecto"]'
+      email_config: '["architecto","architecto"]'
+      notification_settings: '["architecto","architecto"]'
+      status: inactive
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/tenants/{id}'
+    metadata:
+      custom: []
+      groupName: 'Tenant Management'
+      groupDescription: |-
+
+        APIs for managing tenants
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the tenant.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null

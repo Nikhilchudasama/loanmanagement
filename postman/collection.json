@@ -1,0 +1,1012 @@
+{
+  "info": {
+    "name": "Loan Management System API",
+    "description": "Multi-Tenant FinTech Loan Management System API Collection\n\nSeed Users:\n- super@admin.com / password (super-admin)\n- admin@test.com / password (admin)\n- officer@test.com / password (loan-officer)\n- borrower@test.com / password (borrower)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "tenant_id",
+      "value": ""
+    },
+    {
+      "key": "user_id",
+      "value": ""
+    },
+    {
+      "key": "borrower_id",
+      "value": ""
+    },
+    {
+      "key": "loan_id",
+      "value": ""
+    },
+    {
+      "key": "payment_id",
+      "value": ""
+    },
+    {
+      "key": "notification_id",
+      "value": ""
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login as Super Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.collectionVariables.set('token', jsonData.data.token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"super@admin.com\",\n  \"password\": \"password\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login as Tenant Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.collectionVariables.set('token', jsonData.data.token);",
+                  "pm.collectionVariables.set('tenant_id', jsonData.data.user.tenant_id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@test.com\",\n  \"password\": \"password\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login as Loan Officer",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.collectionVariables.set('token', jsonData.data.token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"officer@test.com\",\n  \"password\": \"password\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login as Borrower",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.collectionVariables.set('token', jsonData.data.token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"borrower@test.com\",\n  \"password\": \"password\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "login"]
+            }
+          }
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@test.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/forgot-password",
+              "host": ["{{base_url}}"],
+              "path": ["api", "forgot-password"]
+            }
+          }
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@test.com\",\n  \"token\": \"{{reset_token}}\",\n  \"password\": \"newpassword123\",\n  \"password_confirmation\": \"newpassword123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/reset-password",
+              "host": ["{{base_url}}"],
+              "path": ["api", "reset-password"]
+            }
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/me",
+              "host": ["{{base_url}}"],
+              "path": ["api", "me"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/logout",
+              "host": ["{{base_url}}"],
+              "path": ["api", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "List Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/users?per_page=15",
+              "host": ["{{base_url}}"],
+              "path": ["api", "users"],
+              "query": [
+                { "key": "per_page", "value": "15", "description": "Items per page" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.collectionVariables.set('user_id', jsonData.data.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenant_id\": {{tenant_id}},\n  \"name\": \"New User\",\n  \"email\": \"newuser@example.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\",\n  \"role\": \"loan-officer\",\n  \"status\": \"active\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/users",
+              "host": ["{{base_url}}"],
+              "path": ["api", "users"]
+            }
+          }
+        },
+        {
+          "name": "Get User",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/users/{{user_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "users", "{{user_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Name\",\n  \"role\": \"admin\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/users/{{user_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "users", "{{user_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/users/{{user_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "users", "{{user_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tenants",
+      "item": [
+        {
+          "name": "List Tenants",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/tenants",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tenants"]
+            }
+          }
+        },
+        {
+          "name": "Create Tenant",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.collectionVariables.set('tenant_id', jsonData.data.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_name\": \"Acme Finance Ltd\",\n  \"timezone\": \"Asia/Kolkata\",\n  \"default_currency\": \"INR\",\n  \"payment_gateway_config\": {\n    \"stripe\": {\n      \"secret_key\": \"sk_test_...\",\n      \"webhook_secret\": \"whsec_...\"\n    }\n  },\n  \"status\": \"active\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/tenants",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tenants"]
+            }
+          }
+        },
+        {
+          "name": "Get Tenant",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/tenants/{{tenant_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tenants", "{{tenant_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Tenant",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_name\": \"Acme Finance Updated\",\n  \"default_currency\": \"USD\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/tenants/{{tenant_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tenants", "{{tenant_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Tenant",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/tenants/{{tenant_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tenants", "{{tenant_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Borrowers",
+      "item": [
+        {
+          "name": "List Borrowers",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/borrowers?per_page=15",
+              "host": ["{{base_url}}"],
+              "path": ["api", "borrowers"],
+              "query": [
+                { "key": "per_page", "value": "15", "description": "Items per page" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Borrower",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.collectionVariables.set('borrower_id', jsonData.data.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"Rajesh Kumar\",\n  \"email\": \"rajesh@example.com\",\n  \"mobile_number\": \"+919876543210\",\n  \"date_of_birth\": \"1990-05-15\",\n  \"address\": \"42 MG Road, Mumbai, Maharashtra 400001\",\n  \"national_id\": \"AADHAR1234567890\",\n  \"status\": \"active\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/borrowers",
+              "host": ["{{base_url}}"],
+              "path": ["api", "borrowers"]
+            }
+          }
+        },
+        {
+          "name": "Get Borrower",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/borrowers/{{borrower_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "borrowers", "{{borrower_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Borrower",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"Rajesh Kumar Updated\",\n  \"mobile_number\": \"+919876543211\",\n  \"status\": \"active\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/borrowers/{{borrower_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "borrowers", "{{borrower_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Borrower",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/borrowers/{{borrower_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "borrowers", "{{borrower_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Loans",
+      "item": [
+        {
+          "name": "List Loans",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/loans?per_page=15",
+              "host": ["{{base_url}}"],
+              "path": ["api", "loans"],
+              "query": [
+                { "key": "per_page", "value": "15", "description": "Items per page" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Loan (Reducing Balance)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.collectionVariables.set('loan_id', jsonData.data.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"borrower_id\": {{borrower_id}},\n  \"loan_type\": \"personal\",\n  \"loan_amount\": 500000,\n  \"interest_rate\": 12,\n  \"loan_tenure_months\": 24,\n  \"emi_start_date\": \"2026-08-01\",\n  \"processing_fee\": 2500,\n  \"currency\": \"INR\",\n  \"interest_type\": \"reducing\",\n  \"notes\": \"Personal loan for home renovation\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/loans",
+              "host": ["{{base_url}}"],
+              "path": ["api", "loans"]
+            }
+          }
+        },
+        {
+          "name": "Create Loan (Flat Rate)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.collectionVariables.set('loan_id', jsonData.data.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"borrower_id\": {{borrower_id}},\n  \"loan_type\": \"auto\",\n  \"loan_amount\": 300000,\n  \"interest_rate\": 10,\n  \"loan_tenure_months\": 12,\n  \"emi_start_date\": \"2026-09-01\",\n  \"currency\": \"INR\",\n  \"interest_type\": \"flat\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/loans",
+              "host": ["{{base_url}}"],
+              "path": ["api", "loans"]
+            }
+          }
+        },
+        {
+          "name": "Get Loan",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/loans/{{loan_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "loans", "{{loan_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Loan",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"loan_type\": \"business\",\n  \"notes\": \"Updated loan notes\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/loans/{{loan_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "loans", "{{loan_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Loan",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/loans/{{loan_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "loans", "{{loan_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Approve Loan & Generate EMI Schedule",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/loans/{{loan_id}}/approve",
+              "host": ["{{base_url}}"],
+              "path": ["api", "loans", "{{loan_id}}", "approve"]
+            }
+          }
+        },
+        {
+          "name": "Foreclose Loan",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/loans/{{loan_id}}/foreclose",
+              "host": ["{{base_url}}"],
+              "path": ["api", "loans", "{{loan_id}}", "foreclose"]
+            }
+          }
+        },
+        {
+          "name": "Get EMI Schedule",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/loans/{{loan_id}}/emi-schedules",
+              "host": ["{{base_url}}"],
+              "path": ["api", "loans", "{{loan_id}}", "emi-schedules"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "List Payments",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/payments?per_page=15",
+              "host": ["{{base_url}}"],
+              "path": ["api", "payments"],
+              "query": [
+                { "key": "per_page", "value": "15", "description": "Items per page" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Payment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.collectionVariables.set('payment_id', jsonData.data.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/payments/{{payment_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "payments", "{{payment_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Initiate Full Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"loan_id\": {{loan_id}},\n  \"payment_type\": \"full\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/payments/initiate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "payments", "initiate"]
+            }
+          }
+        },
+        {
+          "name": "Initiate Partial Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"loan_id\": {{loan_id}},\n  \"payment_type\": \"partial\",\n  \"amount\": 10000\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/payments/initiate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "payments", "initiate"]
+            }
+          }
+        },
+        {
+          "name": "Secure Pay (Signed URL)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/pay/{{emi_schedule_id}}?signature=...&expires=...",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pay", "{{emi_schedule_id}}"],
+              "query": [
+                { "key": "signature", "value": "...", "description": "Signed URL signature (generated via URL::signedRoute)" },
+                { "key": "expires", "value": "...", "description": "Expiration timestamp" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Webhook (Stripe)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Stripe-Signature", "value": "test_sig" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"checkout.session.completed\",\n  \"data\": {\n    \"object\": {\n      \"id\": \"cs_test_example123\",\n      \"amount_total\": 500000,\n      \"currency\": \"inr\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/payments/webhook",
+              "host": ["{{base_url}}"],
+              "path": ["api", "payments", "webhook"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "Get Dashboard Metrics",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/dashboard",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dashboard"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reports",
+      "item": [
+        {
+          "name": "Loan Report",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/reports/loans?loan_status=active&currency=INR&date_from=2026-01-01&date_to=2026-12-31&per_page=15",
+              "host": ["{{base_url}}"],
+              "path": ["api", "reports", "loans"],
+              "query": [
+                { "key": "loan_status", "value": "active", "description": "Filter by loan status" },
+                { "key": "currency", "value": "INR", "description": "Filter by currency" },
+                { "key": "date_from", "value": "2026-01-01", "description": "Filter start date" },
+                { "key": "date_to", "value": "2026-12-31", "description": "Filter end date" },
+                { "key": "per_page", "value": "15", "description": "Items per page" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Export Loan Report (Excel)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/reports/loans/export?loan_status=active&date_from=2026-01-01&date_to=2026-12-31",
+              "host": ["{{base_url}}"],
+              "path": ["api", "reports", "loans", "export"],
+              "query": [
+                { "key": "loan_status", "value": "active" },
+                { "key": "date_from", "value": "2026-01-01" },
+                { "key": "date_to", "value": "2026-12-31" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Export Loan Report (PDF)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/reports/loans/export-pdf?loan_status=active&date_from=2026-01-01&date_to=2026-12-31",
+              "host": ["{{base_url}}"],
+              "path": ["api", "reports", "loans", "export-pdf"],
+              "query": [
+                { "key": "loan_status", "value": "active" },
+                { "key": "date_from", "value": "2026-01-01" },
+                { "key": "date_to", "value": "2026-12-31" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        {
+          "name": "List Notifications",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/notifications?per_page=15",
+              "host": ["{{base_url}}"],
+              "path": ["api", "notifications"],
+              "query": [
+                { "key": "per_page", "value": "15", "description": "Items per page" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Unread Notification Count",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/notifications/unread-count",
+              "host": ["{{base_url}}"],
+              "path": ["api", "notifications", "unread-count"]
+            }
+          }
+        },
+        {
+          "name": "Mark Notification as Read",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/notifications/{{notification_id}}/read",
+              "host": ["{{base_url}}"],
+              "path": ["api", "notifications", "{{notification_id}}", "read"]
+            }
+          }
+        },
+        {
+          "name": "Mark All Notifications as Read",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/notifications/read-all",
+              "host": ["{{base_url}}"],
+              "path": ["api", "notifications", "read-all"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Activity Logs",
+      "item": [
+        {
+          "name": "List Activity Logs",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/activity-logs?per_page=15",
+              "host": ["{{base_url}}"],
+              "path": ["api", "activity-logs"],
+              "query": [
+                { "key": "per_page", "value": "15", "description": "Items per page" }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
