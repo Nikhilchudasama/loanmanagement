@@ -39,6 +39,13 @@ jobs:
       - name: Generate app key
         run: php artisan key:generate
 
+      - name: Create Laravel cache directories
+        run: |
+          mkdir -p bootstrap/cache
+          mkdir -p storage/logs
+          mkdir -p storage/framework/views
+          mkdir -p storage/framework/cache/data
+
       - name: Run PHPStan
         run: vendor/bin/phpstan analyse --level=5 --memory-limit=2G
 
